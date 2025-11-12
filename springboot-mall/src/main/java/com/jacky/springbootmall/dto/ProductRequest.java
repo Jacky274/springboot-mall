@@ -1,35 +1,29 @@
-package com.jacky.springbootmall.model;
+package com.jacky.springbootmall.dto;
 
 import com.jacky.springbootmall.constant.ProductCategory;
 
-import java.util.Date;
+import javax.validation.constraints.NotNull;
 
-public class Product
-{
-    private Integer product_id;
-    private String product_name;
+public class ProductRequest {
+    @NotNull
+    private String productName;
+    @NotNull
     private ProductCategory category;
+    @NotNull
     private String imageUrl;
+    @NotNull
     private Integer price;
+    @NotNull
     private Integer stock;
+
     private String description;
-    private Date createdDate;
-    private Date lastModifiedDate;
 
-    public Integer getProduct_id() {
-        return product_id;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setProduct_id(Integer product_id) {
-        this.product_id = product_id;
-    }
-
-    public String getProduct_name() {
-        return product_name;
-    }
-
-    public void setProduct_name(String product_name) {
-        this.product_name = product_name;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public ProductCategory getCategory() {
@@ -70,21 +64,5 @@ public class Product
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public Date getLastModifiedDate() {
-        return lastModifiedDate;
-    }
-
-    public void setLastModifiedDate(Date lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
     }
 }
