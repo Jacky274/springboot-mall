@@ -2,6 +2,7 @@ package com.jacky.springbootmall.model;
 
 import com.jacky.springbootmall.constant.ProductCategory;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Product
@@ -13,8 +14,8 @@ public class Product
     private Integer price;
     private Integer stock;
     private String description;
-    private Date createdDate;
-    private Date lastModifiedDate;
+    private Timestamp createdDate;
+    private Timestamp lastModifiedDate;
 
     public Integer getProduct_id() {
         return product_id;
@@ -72,19 +73,19 @@ public class Product
         this.description = description;
     }
 
-    public Date getCreatedDate() {
+    public Timestamp getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(Timestamp createdDate) {
         this.createdDate = createdDate;
     }
 
-    public Date getLastModifiedDate() {
+    public Timestamp getLastModifiedDate() {
         return lastModifiedDate;
     }
 
-    public void setLastModifiedDate(Date lastModifiedDate) {
+    public void setLastModifiedDate(Timestamp lastModifiedDate) {
         this.lastModifiedDate = lastModifiedDate;
     }
 }

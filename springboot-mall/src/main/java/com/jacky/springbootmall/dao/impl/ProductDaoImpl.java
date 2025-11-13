@@ -41,6 +41,10 @@ private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
             map.put("search", "%" + productQueryParams.getSearch() + "%");
         }
 
+        //只能使用字串拼接方式將ORDER BY 的 SQL 語句
+        //記得在寫SQL語句時在前後加上空格
+        sql = sql + " ORDER BY " + productQueryParams.getOrderBy() + " " + productQueryParams.getSort();
+
         List<Product> productList = namedParameterJdbcTemplate.query(sql, map, new ProductRowMapper());
 
         return productList;
