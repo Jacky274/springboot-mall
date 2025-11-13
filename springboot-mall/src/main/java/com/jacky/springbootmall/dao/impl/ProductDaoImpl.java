@@ -31,6 +31,7 @@ private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
         Map<String,Object> map = new HashMap<>();
 
+        //查詢條件 Filtering
         if (productQueryParams.getCategory() != null) {
             sql = sql + " AND category = :category";
             map.put("category", productQueryParams.getCategory().toString());
@@ -42,8 +43,14 @@ private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
         }
 
         //只能使用字串拼接方式將ORDER BY 的 SQL 語句
-        //記得在寫SQL語句時在前後加上空格
+        //記得在寫SQL語句時在前面加上空格
+        //排序 Sorting
         sql = sql + " ORDER BY " + productQueryParams.getOrderBy() + " " + productQueryParams.getSort();
+        //分頁 Pagination
+        sql = sql + " LIMIT :limit OFFSET :offset ";
+
+        map.put("limit", productQueryParams.getLimit());
+        map.put("offset", productQueryParams.getOffset());
 
         List<Product> productList = namedParameterJdbcTemplate.query(sql, map, new ProductRowMapper());
 
