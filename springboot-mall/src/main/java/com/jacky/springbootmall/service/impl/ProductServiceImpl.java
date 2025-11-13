@@ -1,5 +1,6 @@
 package com.jacky.springbootmall.service.impl;
 
+import com.jacky.springbootmall.constant.ProductCategory;
 import com.jacky.springbootmall.dao.ProductDao;
 import com.jacky.springbootmall.model.Product;
 import com.jacky.springbootmall.service.ProductService;
@@ -16,8 +17,8 @@ public class ProductServiceImpl implements ProductService {
     private ProductDao productDao;
 
     @Override
-    public List<Product> getProducts() {
-        return productDao.getProducts();
+    public List<Product> getProducts(ProductCategory category, String search) {
+        return productDao.getProducts(category, search);
     }
 
     @Override
