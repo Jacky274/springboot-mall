@@ -30,15 +30,7 @@ private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
         Map<String,Object> map = new HashMap<>();
 
         //查詢條件 Filtering
-        if (productQueryParams.getCategory() != null) {
-            sql = sql + " AND category = :category";
-            map.put("category", productQueryParams.getCategory().toString());
-        }
-
-        if (productQueryParams.getSearch() != null) {
-            sql = sql + " AND product_name LIKE :search";
-            map.put("search", "%" + productQueryParams.getSearch() + "%");
-        }
+       sql = addFilteringSql(sql,map,productQueryParams);
 
         return namedParameterJdbcTemplate.queryForObject(sql, map, Integer.class);
     }
@@ -52,15 +44,7 @@ private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
         Map<String,Object> map = new HashMap<>();
 
         //查詢條件 Filtering
-        if (productQueryParams.getCategory() != null) {
-            sql = sql + " AND category = :category";
-            map.put("category", productQueryParams.getCategory().toString());
-        }
-
-        if (productQueryParams.getSearch() != null) {
-            sql = sql + " AND product_name LIKE :search";
-            map.put("search", "%" + productQueryParams.getSearch() + "%");
-        }
+       sql = addFilteringSql(sql,map,productQueryParams);
 
         //只能使用字串拼接方式將ORDER BY 的 SQL 語句
         //記得在寫SQL語句時在前面加上空格
@@ -150,5 +134,18 @@ private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
         map.put("productId", productId);
 
         namedParameterJdbcTemplate.update(sql, map);
+    }
+
+    private String addFilteringSql(String sql, Map<String, Object> map, ProductQueryParams productQueryParams){
+        if (productQueryParams.getCategory() != null) {
+            sql = sql + " AND category = :category";
+            map.put("category", productQueryParams.getCategory().toString());
+        }
+
+        if (productQueryParams.getSearch() != null) {
+            sql = sql + " AND product_name LIKE :search";
+            map.put("search", "%" + productQueryParams.getSearch() + "%");
+        }
+        return sql;
     }
 }
