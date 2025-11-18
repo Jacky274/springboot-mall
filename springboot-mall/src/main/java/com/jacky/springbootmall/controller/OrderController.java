@@ -1,6 +1,7 @@
 package com.jacky.springbootmall.controller;
 
 import com.jacky.springbootmall.dto.CreateOrderRequest;
+import com.jacky.springbootmall.model.Order;
 import com.jacky.springbootmall.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,9 @@ public class OrderController {
     public ResponseEntity<?> createOrder(@PathVariable Integer userId, @RequestBody @Valid CreateOrderRequest createOrderRequest){
        Integer orderId = orderService.createOrder(userId,createOrderRequest);
 
-       return  ResponseEntity.status(HttpStatus.CREATED).body(orderId);
+        Order order = orderService.getOrderById(orderId);
+
+       return  ResponseEntity.status(HttpStatus.CREATED).body(order);
     }
 
 
